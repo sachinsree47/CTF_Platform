@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  ctfd:
+    image: ctfd/ctfd
+    container_name: ctfd
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ctfd/CTFd:/opt/CTFd
+      - ./ctfd/CTFd/plugins:/opt/CTFd/plugins
+      - ./ctfd/CTFd/themes:/opt/CTFd/themes
+    environment:
+      - UPLOAD_FOLDER=/opt/CTFd/uploads
+      - DATABASE_URL=sqlite:////opt/CTFd/ctfd.db
+
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      - MYSQL_PASSWORD=p@ssw0rd
+      - MYSQL_USER=root
+    depends_on:
+      - mysql
+
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    restart: always
+    ports:
+      - "3000:3000"
+
+  mysql:
+    image: mysql:5.7
+    container_name: dvwa-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD=p@ssw0rd
+    volumes:
+      - dvwa-db:/var/lib/mysql
+
+volumes:
+  dvwa-db:
