@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="text-center py-4">
+    <img src="{{ url_for('themes', theme='frochi-theme', path='assets/Frochi_ctf.png') }}"
+         alt="Frochi CTF Banner"
+         class="frochi-banner">
+  </div>
+
+  <div class="text-center mt-4">
+    <h1 class="frochi-heading rainbow-text">✨ Welcome to Frochi CTF ✨</h1>
+    <p class="frochi-subtext">A dreamy cyber playground where hacking meets love 💖<br><strong>Learn. Hack. Play. Repeat. Together with Frozy + Mochi.</strong></p>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="/challenges" class="frochi-btn">🚀 Start Hacking</a>
+    <a href="/scoreboard" class="frochi-btn frochi-outline">🏆 View Leaderboard</a>
+    <a href="/notifications" class="frochi-btn frochi-outline">📢 Announcements</a>
+  </div>
+
+  <div class="mt-5 px-5">
+    <h2 class="frochi-section-title">📘 How to Play</h2>
+    <ul class="frochi-howto">
+      <li>🧠 Solve challenges from Web, Crypto, Pwn, Forensics, and Reversing</li>
+      <li>🔍 Explore intentionally vulnerable apps like Juice Shop & DVWA</li>
+      <li>🚩 Capture flags in the format <code>frochi{your_flag_here}</code></li>
+      <li>💯 Earn points, climb the leaderboard, and become a Frochi master</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-5 mb-4">
+    <p class="frochi-footer">Made with 💜 by <strong>Sachin Sree</strong><br>
+      Designed by <strong>Frozy & Mochi</strong> | ⚡ Powered by CTFd + Docker</p>
+    <small style="color:#666;">Version 1.0 — Stay tuned for updates and new challenges every week!</small>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    const heading = document.querySelector('.frochi-heading');
+    heading.animate([
+      { transform: 'translateY(0px)' },
+      { transform: 'translateY(-5px)' },
+      { transform: 'translateY(0px)' }
+    ], {
+      duration: 4000,
+      iterations: Infinity
+    });
+  </script>
+{% endblock %}
